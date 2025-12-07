@@ -1,17 +1,16 @@
 [Unit]
-Description=Ubuntu Toolbox for your toolbox needs
+Description=Arch Toolbox for your toolbox needs
 
 [Container]
 AutoUpdate=registry
-ContainerName=ubuntu-toolbox-quadlet
+ContainerName=arch-toolbox-quadlet
 Environment=TOOLBOX_PATH=/usr/bin/toolbox
 Environment=XDG_RUNTIME_DIR=%t
 Exec=init-container --gid %G --home %h --shell %s --uid %U --user %u --home-link --media-link --mnt-link
-HostName=ubuntu-toolbox-quadlet
-Image=ghcr.io/ublue-os/ubuntu-toolbox:latest
+HostName=arch-toolbox-quadlet
+Image=ghcr.io/ublue-os/arch-toolbox:latest
 Mount=type=devpts,destination=/dev/pts
 Network=host
-PodmanArgs=--dns none
 PodmanArgs=--cgroupns host
 PodmanArgs=--ipc host
 PodmanArgs=--label com.github.containers.toolbox=true
@@ -26,7 +25,7 @@ User=root:root
 Volume=/:/run/host:rslave
 Volume=/dev:/dev:rslave
 Volume=/run/dbus/system_bus_socket:/run/dbus/system_bus_socket
-Volume=/var/home/%u:/var/home/%u:rslave
+Volume=/var/%h:/var/%h:rslave
 Volume=/usr/bin/toolbox:/usr/bin/toolbox:ro
 Volume=%t:%t
 Volume=/run/avahi-daemon/socket:/run/avahi-daemon/socket

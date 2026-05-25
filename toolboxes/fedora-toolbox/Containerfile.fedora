@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-toolbox:44@sha256:54eaef913a35b69070005ef12d0a2dbfe35bfd27c2594e3eafde0d48ecd33b8d AS builder
+FROM registry.fedoraproject.org/fedora-toolbox:44@sha256:6b6818e74c3c317d24cfa6f27dbc0c132d15507d85e3d8a6a8fb3c0afe2653e6 AS builder
 COPY ./toolboxes/fedora-toolbox/packages.fedora /toolbox-packages
 
 # Set up dependencies

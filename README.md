@@ -1,4 +1,5 @@
 # toolboxes
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/ublue-os/toolboxes/badge)](https://scorecard.dev/viewer/?uri=github.com/ublue-os/toolboxes)
 
 Centralized repository of containers designed for Toolbox/Distrobox with batteries included. These toolboxes strive for:
 
@@ -13,13 +14,35 @@ Centralized repository of containers designed for Toolbox/Distrobox with batteri
 - `debian-toolbox` - a Debian base image
 - `fedora-toolbox` - a Fedora base image
 - `arch-toolbox` - an Arch base image
-- `bazzite-arch` - an Arch based image that includes gaming utilities and Steam
-- `bazzite-arch-gnome` - Variation of Bazzite-arch for GNOME
+- `steambox` - an Arch based image that includes gaming utilities and Steam, formerly called `bazzite-arch`
+- `steambox-gnome` - Variation of SteamBox for GNOME, formerly called `bazzite-arch-gnome`
 - `wolfi-toolbox` - a WolfiOS base image
 - `docker-distrobox` - an Ubuntu distrobox with Docker-CE. It will export the docker socket to the host.
 - `incus-distrobox` - an Ubuntu distrobox with Incus packages from Zabbly.
 
-It is strongly recommended that the [Ptyxis terminal](https://gitlab.gnome.org/chergert/ptyxis) be used with these toolboxes and is the default experience in both [Bazzite](https://bazzite.gg) and [Bluefin](https://projectbluefin.io).
+It is strongly recommended that either [Ptyxis](https://gitlab.gnome.org/chergert/ptyxis) or [Konsole](https://apps.kde.org/konsole/) be used with these toolboxes and is the default experience in [Bazzite](https://bazzite.gg), [Bluefin](https://projectbluefin.io) and [Aurora](https://getaurora.dev).
+
+### SteamBox Usage
+
+For Intel and AMD GPUs, the support is baked in, as the containers will install their latest available Mesa/DRI drivers.
+
+> [!NOTE]
+> For the GNOME desktop environment, you may want to replace `ghcr.io/ublue-os/steambox` in the below command with `ghcr.io/ublue-os/steambox-gnome`, which comes with `xdg-desktop-portal-gtk`.
+
+To create a container using SteamBox image, run this command:
+
+```bash
+distrobox-create --unshare-netns --nvidia --image ghcr.io/ublue-os/steambox --name steambox -Y
+```
+
+Once the container has been created, you may optionally export the pre-installed applications to your host operating system using the following commands:
+
+```bash
+distrobox-enter -n steambox -- distrobox-export --app steam
+distrobox-enter -n steambox -- distrobox-export --app lutris
+distrobox-enter -n steambox -- distrobox-export --app protontricks
+distrobox-enter -n steambox -- mkdir -p ~/.steam; distrobox-export --bin /usr/bin/steamcmd --export-path ~/.steam; mv ~/.steam/steamcmd ~/.steam/steamcmd.sh
+```
 
 ## Automatic Toolbox Startup
 
